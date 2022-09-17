@@ -7,11 +7,11 @@ describe('view: ProductOrders', () => {
     });
 
     it('Layout: should be present', () => {
-        cy.shouldContainBaseLayout({ title: "My store!" })
+        cy.shouldContainBaseLayout({ title: "Whattablackhole's store" })
     });
 
     it('Footer: should contain copyright', () => {
-        cy.shouldContainFooter({ text: 'Copyright © My store!' })
+        cy.shouldContainFooter({ text: 'Copyright © Whattablackhole's store' })
     });
 
     it('Footer: should tell thank you', () => {

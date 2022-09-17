@@ -6,6 +6,7 @@ build
 node_modules
 /.pnp
 .pnp.js
+jspm_packages
 
 # Testing
 /tests/e2e/videos/
