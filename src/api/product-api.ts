@@ -30,7 +30,7 @@ const fetchProducts = async (): Promise<Product[]> => {
 const fetchProductById = async (id: string) => {
 	console.info(`GET fetchProductById: ${id}`);
 
-	return axios.get(`${API_PATHS.bff}/product/${id}`).then(res => res.data);
+	return axios.get(`${API_PATHS.product}/${id}`).then(res => res.data);
 };
 
 const deleteProductById = (id: string) => {
