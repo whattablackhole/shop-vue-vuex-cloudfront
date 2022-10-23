@@ -53,6 +53,9 @@ const fetchPresignedS3Url = (url: string, fileName: string) => {
 	return axios({
 		method: 'GET',
 		url,
+		headers: {
+			Authorization: `Basic ${localStorage.getItem('authorization_token')}`,
+		},
 		params: {
 			name: encodeURIComponent(fileName),
 		},
