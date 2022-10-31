@@ -6,23 +6,33 @@ import { CartItem } from '@/models/cart-item';
 // TODO: ASK, same verb
 
 interface FetchCartResponse {
-	data: {
-		data: CartItem;
-	};
+	data: CartItem[];
 }
 
-const fetchCart = (): Promise<FetchCartResponse> => {
-	return axios.get(`${API_PATHS.cart}/profile/cart`, {
-		headers: {
-			Authorization: `Basic ${localStorage.getItem('authorization_token')}`,
-		},
-	});
+const fetchCart = async (): Promise<FetchCartResponse> => {
+	const mockedUserId =
+		localStorage.getItem('user_id') ?? 'e91ff132-3cb2-4857-898f-d1b48a9a916d';
+	const result = await axios.get(
+		`${API_PATHS.cart}/api/profile/cart?userId=${mockedUserId}`,
+		{
+			headers: {
+				Authorization: `Basic ${localStorage.getItem('authorization_token')}`,
+			},
+		}
+	);
+	return {
+		data: result.data.data.cart.items.map((item: any) => {
+			return { product: item.product, count: item.count } as CartItem;
+		}),
+	};
 };
 
 // add, remove - new items
 const updateCart = (items: CartItem[]) => {
+	const mockedUserId =
+		localStorage.getItem('user_id') ?? 'e91ff132-3cb2-4857-898f-d1b48a9a916d';
 	return axios.put(
-		`${API_PATHS.cart}/profile/cart`,
+		`${API_PATHS.cart}/api/profile/cart?userId=${mockedUserId}`,
 		{ items },
 		{
 			headers: {
